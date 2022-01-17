@@ -30,3 +30,13 @@ font-size: 23px;
 .div_volume{
     float: right;
 }
+
+.play_button{
+    width: 150px;
+    font-size: 25px;
+}
+
+canvas{
+    border: solid 5px darkblue;
+    border-radius: 20px;
+}
