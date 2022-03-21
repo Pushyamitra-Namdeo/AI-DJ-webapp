@@ -1,6 +1,7 @@
 song="";
 leftWristx=0;
 leftWristy=0;
+score= 0;
 
 rightWristx=0;
 rightWristy=0;
@@ -21,6 +22,19 @@ posenet.on('pose', got_poses);
 
 function draw(){
     image(video,0,0,600,500);
+
+    fill("#eb0707");
+    stroke("#eb0707");
+
+    if(score > 0.2)
+    {
+    circle(leftWristx,leftWristy,20);
+    inNumberLeftWristY= Number(leftWristy);
+    remove_decimals= floor(inNumberLeftWristY);
+    volume= remove_decimals/500;
+    document.getElementById("volume").innerHTML= "Volume = "+ volume;
+    song.setVolume(volume);
+    }
 }
 
 function play(){
@@ -37,13 +51,16 @@ function got_poses(results){
 if(results.length>0){
 
 console.log(results);
+score= results[0].pose.keypoints[9].score;
+console.log("Score = "+score);
+
 leftWristx= results[0].pose.leftWrist.x;
 leftWristy= results[0].pose.leftWrist.y;
 
 rightWristx= results[0].pose.rightWrist.x;
 rightWristy= results[0].pose.rightWrist.y;
 console.log("leftWristx = "+ leftWristx+"leftWrisrty"+leftWristy);
-console.log("rightWristx = "+ rightWristx+"rightWrisrty"+rightWristy);
+console.log("rightWristx = "+ rightWristx+"rightWrisrty"+rightWristy)
 }
 }
     
